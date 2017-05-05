@@ -11,25 +11,24 @@ VS Code with docker plugin (optional)
 
 ## Agenda 
 ### Introduction Docker Containers 
-Container 101 
-Repository’s 
-DockerFile’s 
+- Containers 101
+- Repository’s 
+- DockerFile’s 
    
 ### Hands on with Containers Lab 
- Run a container 
- Pull/Push image from Docker Hub 
- DockerFile 
+- Run a container 
+- Pull/Push image from Docker Hub 
+- DockerFile 
     
 ### Docker Compose 
 
 ### Orchestrators 
- Intro 
- Swarm/Kubernetes/Service Fabric 
- Swarm API 
+- Intro 
+- Swarm/Kubernetes/Service Fabric 
+- Swarm API 
     
 ### Orchestrators Hands On 
- [Create Swarm Cluster In Azure](https://github.com/billpratt/docker-azure-workshop/blob/master/deploy-docker-swarm.md)
- Bonus: 
-      Deploy Kubernetes with Azure Container 
-      Service 
- Double Bonus: Set up CI with VSTS 
+- [Create Swarm Cluster In Azure](https://github.com/billpratt/docker-azure-workshop/blob/master/deploy-docker-swarm.md)
+- Bonus: 
+   - Deploy Kubernetes with Azure Container Service 
+- Double Bonus: Set up CI with VSTS 
