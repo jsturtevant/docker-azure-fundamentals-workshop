@@ -18,7 +18,7 @@ Welcome to the Container Workshop where you will get hands-on with containers. W
 - [VS Code](https://code.visualstudio.com/) with [Docker plugin](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) (optional)
 
 ## Agenda 
-### Introduction Docker Containers 
+### Introduction Docker Containers ([presentation](https://github.com/jsturtevant/docker-azure-fundamentals-workshop/blob/master/presentations/Introduction-to-Docker.pptx))
 - Containers 101
 - Repository’s 
 - DockerFile’s 
@@ -28,9 +28,9 @@ Welcome to the Container Workshop where you will get hands-on with containers. W
 - Pull/Push image from Docker Hub 
 - DockerFile 
     
-### Docker Compose 
+### Docker Compose and CI Builds ([presentation](https://github.com/jsturtevant/docker-azure-fundamentals-workshop/blob/master/presentations/Compose-and-BuildProcess.pptx))
 
-### Orchestrators 
+### Orchestrators ([presentation](https://github.com/jsturtevant/docker-azure-fundamentals-workshop/blob/master/presentations/Orchestrators.pptx))
 - Intro 
 - Swarm/Kubernetes/Service Fabric 
 - Swarm API 
