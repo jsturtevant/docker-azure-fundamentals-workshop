@@ -3,11 +3,19 @@
 ## Description 
 Welcome to the Container Workshop where you will get hands-on with containers. We will start the day with running Docker containers locally and by the end of the day having them running in a deploying them to the Azure Cloud.
 
-## Requirements 
-Azure Subscription (The ways to get it free) 
-Docker for windows or Docker for Mac or Linux machine with Docker install (if none of these are an option can create VM Cloud using instructions here) 
-Azure Cli 
-VS Code with docker plugin (optional)
+## Requirements
+
+- Azure Subscription
+   - [Free Trial](https://azure.microsoft.com/en-us/free/)
+   - [Visual Studio Dev Essentials](https://azure.microsoft.com/en-us/pricing/member-offers/vs-dev-essentials/)
+- Docker (choose your platform below)
+   - [Docker for Windows](https://docs.docker.com/docker-for-windows/install/) 
+   - [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
+   - [Linux machine with Docker install](https://docs.docker.com/engine/installation/#supported-platforms) - choose your linux flavor
+   - If none of these are an option you can [create Docker VM](https://github.com/Azure/azure-quickstart-templates/tree/master/docker-simple-on-ubuntu) by clicking ```Deploy to Azure``` button
+- [Azure Cli 2.0](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+- [Bash On Ubuntu On Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
+- [VS Code](https://code.visualstudio.com/) with [Docker plugin](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) (optional)
 
 ## Agenda 
 ### Introduction Docker Containers 
