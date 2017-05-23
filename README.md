@@ -40,3 +40,8 @@ Welcome to the Container Workshop where you will get hands-on with containers. W
 - Bonus: 
    - Deploy Kubernetes with Azure Container Service 
 - Double Bonus: Set up CI with VSTS 
+
+
+## Credits
+
+Some of the labs for this workshop were adapted from https://github.com/Lybecker/ContainerWorkshop and https://github.com/tripdubroot/ContainerCamp.  
