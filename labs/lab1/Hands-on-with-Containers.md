@@ -1,5 +1,9 @@
 # Docker Intro
 
+In this lab you will be introduced the useful Docker CLI commands.  This will set the foundation for working with Docker in the rest of the labs.
+
+## Let's get started
+
 We will start with the classic Hello World, Docker style:
 
 1. Type the following command in the terminal: 
@@ -71,7 +75,7 @@ We will start with the classic Hello World, Docker style:
 	$ docker run -it ubuntu /bin/bash
 	```
 
-    You are now at at an Ubuntu bash prompt.  The  ```-i```  flag starts an interactive container meaning that the prompt we enter will be from within the container. The  ```-t```  flag creates a pseudo-TTY that attaches  stdin  and  stdout.  The ```bin/bash``` tells the container to run the bash command when it starts up.
+    You are now at at an Ubuntu bash prompt.  The  ```-i```  flag starts an interactive container meaning that the prompt we enter will be from within the container. The  ```-t```  flag creates a pseudo-TTY that attaches  stdin  and  stdout.  The ```bin/bash``` tells the container the startup command to run the bash when it starts.
 
     Give it a try by running something like:
 
@@ -111,6 +115,53 @@ We will start with the classic Hello World, Docker style:
 
     Notice that the status for the Ubuntu image is ```Up``` and the status for ```hello-world``` is ```Exited```.
 
+7. We can also re-attach to any running containers.  Let's re-attach the the running Ubuntu image, add a file, then create a new custom image.  This will demonstrate how you work with containers and is useful in one off scenarios but not so much in        production.  We will see a better way to modify container contents in a later lab.  For now this will get you use to working with containers. 
+
+    Use the output from the previous ```docker ps``` command to get the ```container id```.  In my case it is ```ef587c7c7b73``` but yours will be unique.  Note you only have to specify enough values from the id to be unique across containers running on your machine, in this case I used just ```ef5```:
+
+    ```
+    $ docker attach ef5
+    ```
+
+    You will now be running bash inside the container.  Next create a file and verify it's contents"
+
+    ```
+    root@ef587c7c7b73:/# echo "hello from ubuntu container" > hello.txt
+    root@ef587c7c7b73:/# cat hello.txt
+    
+
+    hello from ubuntu container
+    ```
+
+    Exit the container using  ```Ctrl-p  +  Ctrl-q```.  We modified the contents of the container.  If we were to re-attach to the container the ```hello.txt``` file would still be there but if we were to create a new container from ```docker run -it ubuntu /bin/bash``` the file would not be there (go ahead and give it a try).
+
+    What if we wanted that file to be there when started a new container?  We can 'commit' our changes and create a new image:
+
+    ```
+    $ docker commit ef5 my-custom-ubuntu
+
+    $ docker images
+    ```
+
+    Here we use ```docker commit``` and passed the container id (found in previous step) and gave the image a new name.  Your output should look like:
+
+    ```
+    REPOSITORY                                             TAG                     IMAGE ID            CREATED             SIZE
+    my-custom-ubuntu                                       latest                  47b846a5c1f6        18 seconds ago      118 MB
+    ubuntu                                                 latest                  6a2f32de169d        5 weeks ago         117 MB
+    hello-world                                            latest                  48b5124b2768        4 months ago        1.84 kB
+    ```
+
+    Finally we can now create a container from the new image and verify the contents:
+
+    ```
+    $ docker run -it my-custom-ubuntu /bin/bash
+    root@ebfedfe1fcf5:/# cat hello.txt
+    hello from ubuntu container
+    ```
+
+    Exit and stop the container by using ```ctrl-c```.
+
 6. You can also create long running containers and inspect their logs.  Let's create a long running container and assign it a name
 
 	```
@@ -124,12 +175,29 @@ We will start with the classic Hello World, Docker style:
 	$ docker kill my-ubuntu	
     ```	
 
-7. Inspecting our container
-	Lastly, we can take a low-level dive into our Docker container using the docker inspect command. It returns a JSON hash of useful configuration and status information about Docker containers.
+8.  For containers that did not have an interactive prompt, like the ```my-ubuntu``` machine we created, we can still attach to them using ```docker exec```,  this is useful when you are in development but if you find yourself doing anything like this     in production you should probably reconsider your approach.  
+
+    ```docker exec``` will attach to the running container in a way that is similar to ```ssh``` into a machine,  all of the process will still be running and you can use it to inspect the current state of the container.    Let's attach to the 
+
+    ```
+    $ docker exec -it my-ubuntu /bin/bash
+    ```
+
+    This will give you a prompt on the running machine, while the main process still runs.
+
+7. Lastly, we can take a low-level dive into our Docker container using the docker inspect command. It returns a JSON hash of useful configuration and status information about Docker containers.  We won't go into detail here but it is a useful command to know.  Take a look at it. What information to you recognize?
 
 	```
-	$ docker inspect container_name
+	$ docker inspect my-ubuntu
 	```
 
-### Credits
+## Wrap up
+To wrap up the command kill all the running containers and clean up.  Note the ```docker system prune``` should only be used in environments where you want to throw away old containers.
+
+```
+$ docker stop $(docker ps -q)  #on windows use: FOR /f "tokens=*" %i IN ('docker ps -q') DO docker stop %i
+$ docker system prune
+```
+
+## Credits
 This lab was adapted from https://github.com/Lybecker/ContainerWorkshop.
