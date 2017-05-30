@@ -3,10 +3,11 @@
 In this lab you will be introduced the DockerFile and Docker Repositories.  In the previous lab we created a container, added a file and committed.  Although this was a good exercise to get us use to working with containers, in real systems this would quickly become tedious.  Instead there is a concept of a docker file, which is a script that enables use to define what container should look like.  
 
 ## Let's get started
-1. Clone the repository at ... and move into the directory.  You can optionally open the code in VS Code or your favorite editor.
+1. If you haven't already clone ths repository at ```https://github.com/jsturtevant/docker-azure-fundamentals-workshop``` and move into the directory ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker```.  You can optionally open the code in VS Code or your favorite editor.
 
     ``` 
-    git clone repo name
+    $ git clone https://github.com/jsturtevant/docker-azure-fundamentals-workshop.git
+    $ cd docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker
     ```
 
     This is a simple hello word in ASP.NET.  
