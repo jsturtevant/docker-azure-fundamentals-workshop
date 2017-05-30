@@ -1,6 +1,8 @@
 # Working containers with Dockerfile and Registries
 
-In this lab you will be introduced the DockerFile and Docker Repositories.  In the previous lab we created a container, added a file and committed.  Although this was a good exercise to get us use to working with containers, in real systems this would quickly become tedious.  Instead there is a concept of a docker file, which is a script that enables use to define what container should look like.  
+In this lab you will be introduced the DockerFile and Docker Compose.  In the previous lab we created a container, added a file and committed.  Although this was a good exercise to get us use to working with containers, in real systems this would quickly become tedious.  Instead there is a concept of a docker file, which is a script that enables use to define what container should look like.  
+
+We will use a ```Dockerfile``` to build and run an Asp.Net Core application.  Note that you will **not** need anything other than docker installed to do this lab.
 
 ## Let's get started
 1. If you haven't already clone ths repository at ```https://github.com/jsturtevant/docker-azure-fundamentals-workshop``` and move into the directory ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker```.  You can optionally open the code in VS Code or your favorite editor.
@@ -17,36 +19,78 @@ In this lab you will be introduced the DockerFile and Docker Repositories.  In t
     Paste the follow into the file
 
     ```
-    FROM microsoft/aspnetcore:1.1.1
+    FROM microsoft/aspnetcore:1.1.2
+
     WORKDIR /app
     EXPOSE 80
-    ENTRYPOINT ["dotnet", "WebFront.dll"]
+    ENTRYPOINT ["dotnet", "hellodocker.dll"]
 
     ## copy last as this is the most likely thing that will change
     ## reduces build time/disk usage/bandwidth
-    COPY . .
+    COPY ./bin/Release/netcoreapp1.1/publish .
     ```
 
-3. Run the command:
+    You will notice that this copies the files at ```bin/Release/netcoreapp1.1/``` to the container.  We have not yet built our project so we could use the command line to restore the packages, build the source and then use the above Dockerfile (*if you don't have dotnet core installed skip to step 3*):
+    
+    ```
+    dotnet restore
+    dotnet publish -c Release
+    ```  
+
+    Finally we can build the image by running:
 
     ```
-    docker build -t my-aspnetcore .
+    docker build -t hellodocker .
     ```
-    This will create the new image based on the public image ```my-aspnetcore```
 
+    Run your new docker container with ```docker run -d -p 8080:80 hellodocker``` and navigate to navigate to ```localhost:8080```.
 
-4. Run your new docker container with ```docker run -d -p 8080:80 my-aspnetcore```
+3. The above steps required you to have Asp.Net Core installed.  It also required several manual steps. To automate the process and also eliminate the need for external dependencies (very helpful on a build machine) we can introduce a second container that will have the dependencies and tooling installed.  We will do this using a compose file:
 
-5. Navigate to localhost:8080
+     Add a file in the root of the repository called ```docker-compose.build.yml``` (```touch docker-compose.build.yml``` or through your editor) and paste the following in:
 
-6. Create [Azure Container Registry](https://portal.azure.com/#create/Microsoft.ContainerRegistry):
+    ```
+    version: '2'
 
-![Create Azure Container Registry in portal](images/create-azure-container-registry.png)
+    services:
+        build-image:
+            build: .
+            image: hellodocker
 
-7.  Get credentials
+        build:
+            image: microsoft/aspnetcore-build:1.1.2
+            volumes:
+                - .:/src
 
-8. sign in 
+            working_dir: /src
+            command: /bin/bash -c "dotnet restore  && dotnet publish -c Release"
 
-9. push 
+    ```
 
-10. pull.
+    This uses a compose file to add two new services that help automate the build process.  The ```build-image``` service simply uses the Dockerfile that we already created.  The second service ```build``` uses asp.net core build image that has all the dependencies needed to build a asp.net core project. If you do not have asp.net core installed this will still enable you to build the project.
+
+    To use the compose file, first build the project:
+
+    ```
+    docker-compose -f docker-compose.build.yml up build
+    ```
+
+    This will build the project **inside the ```microsoft/aspnetcore-build:1.1.2```** container.  There is a volume map that maps the current directory (all of the asp.net source) to the container.  When the build is finished you should find the resulting build at ```./bin/Release/netcoreapp1.1/publish```.  
+
+    Now you can build the image and run your project:
+
+    ```
+    docker-compose -f docker-compose.build.yml build build-image
+    docker run -d -p 8080:80 hellodocker
+    ```
+
+    Navigate to navigate to ```localhost:8080``` to see your project. 
+
+## Wrap up
+To wrap up the command kill all the running containers and clean up.  Note the ```docker system prune``` should only be used in environments where you want to throw away old containers.
+
+```
+$ docker-compose -f docker-compose.build.yml down
+$ docker stop $(docker ps -q)  #on windows use: FOR /f "tokens=*" %i IN ('docker ps -q') DO docker stop %i
+$ docker system prune
+```
