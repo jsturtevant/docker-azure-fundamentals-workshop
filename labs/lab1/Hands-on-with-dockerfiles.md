@@ -7,7 +7,7 @@ We will use a ```Dockerfile``` to build and run an Asp.Net Core application.  No
 This is the second part in Lab1:
 
 - [Hands on with Containers](Hands-on-with-containers.md)
-- [Hands on with Dockerfiles](this file)
+- Hands on with Dockerfiles (this file)
 - [Hands on with Registries](Hands-on-with-registries.md)
 
 ## Let's get started
