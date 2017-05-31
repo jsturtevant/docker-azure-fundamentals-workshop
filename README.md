@@ -13,8 +13,11 @@ Welcome to the Container Workshop where you will get hands-on with containers. W
    - [Docker for Mac](https://docs.docker.com/docker-for-mac/install/)
    - [Linux machine with Docker install](https://docs.docker.com/engine/installation/#supported-platforms) - choose your linux flavor
    - If none of these are an option you can [create Docker VM](https://github.com/Azure/azure-quickstart-templates/tree/master/docker-simple-on-ubuntu) by clicking ```Deploy to Azure``` button
-- [Azure Cli 2.0](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
-- [Bash On Ubuntu On Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide)
+
+The following are optional:
+
+- [Azure Cli 2.0](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) (optional)
+- [Bash On Ubuntu On Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide) (optional)
 - [VS Code](https://code.visualstudio.com/) with [Docker plugin](https://marketplace.visualstudio.com/items?itemName=PeterJausovec.vscode-docker) (optional)
 
 ## Agenda 
