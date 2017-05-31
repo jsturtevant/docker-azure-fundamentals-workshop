@@ -4,6 +4,11 @@ In this lab you will be introduced the DockerFile and Docker Compose.  In the pr
 
 We will use a ```Dockerfile``` to build and run an Asp.Net Core application.  Note that you will **not** need anything other than docker installed to do this lab.
 
+This is the second part in Lab1:
+    - [Hands on with Containers](Hands-on-with-containers.md)
+    - [Hands on with Dockerfiles](this file)
+    - [Hands on with Registries](Hands-on-with-registries.md)
+
 ## Let's get started
 1. If you haven't already clone ths repository at ```https://github.com/jsturtevant/docker-azure-fundamentals-workshop``` and move into the directory ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker```.  You can optionally open the code in VS Code or your favorite editor.
 
@@ -94,3 +99,6 @@ $ docker-compose -f docker-compose.build.yml down
 $ docker stop $(docker ps -q)  #on windows use: FOR /f "tokens=*" %i IN ('docker ps -q') DO docker stop %i
 $ docker system prune
 ```
+
+## Next Part 
+Proceed to next lab which will show you how to work with [registries](Hands-on-with-registries.md).

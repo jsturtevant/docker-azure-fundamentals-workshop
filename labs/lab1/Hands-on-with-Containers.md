@@ -2,6 +2,11 @@
 
 In this lab you will be introduced the useful Docker CLI commands.  This will set the foundation for working with Docker in the rest of the labs.
 
+This is the first part in Lab1:
+    - Hands on with Containers (this file)
+    - [Hands on with Dockerfiles](Hands-on-with-dockerfiles.md)
+    - [Hands on with Registries](Hands-on-with-registries.md)
+
 ## Let's get started
 
 We will start with the classic Hello World, Docker style:
@@ -80,8 +85,9 @@ We will start with the classic Hello World, Docker style:
     Give it a try by running something like:
 
     ```
-    $ apt-get install fortune 
-    $ fortune
+    # apt-get update
+    # apt-get install fortune 
+    # /usr/games/fortune
     ```
 	
 	At this point you are running commands inside the Ubuntu container.  To leave the container and get back to your local machine prompt you can use the escape sequence  ```Ctrl-p  +  Ctrl-q```.  This will detach the TTY without exiting the shell; The container will continue to exist in a stopped state once exited. 
@@ -133,7 +139,7 @@ We will start with the classic Hello World, Docker style:
     hello from ubuntu container
     ```
 
-    Exit the container using  ```Ctrl-p  +  Ctrl-q```.  We modified the contents of the container.  If we were to re-attach to the container the ```hello.txt``` file would still be there but if we were to create a new container from ```docker run -it ubuntu /bin/bash``` the file would not be there (go ahead and give it a try).
+    Exit the container using  ```Ctrl-p  +  Ctrl-q```.  We modified the contents of the container.  If we were to re-attach to the container the ```hello.txt``` file would still be there but if we were to create a new container from ```docker run -it ubuntu /bin/bash``` the file would not be there (**go ahead and give it a try**).
 
     What if we wanted that file to be there when started a new container?  We can 'commit' our changes and create a new image:
 
@@ -160,7 +166,7 @@ We will start with the classic Hello World, Docker style:
     hello from ubuntu container
     ```
 
-    Exit and stop the container by using ```ctrl-c```.
+    Exit the container by using ```Ctrl-p  +  Ctrl-q```.
 
 6. You can also create long running containers and inspect their logs.  Let's create a long running container and assign it a name
 
@@ -170,10 +176,9 @@ We will start with the classic Hello World, Docker style:
 	
 	# Collect the output of the job so far
 	$ docker logs my-ubuntu
-	
-	# Kill the job
-	$ docker kill my-ubuntu	
     ```	
+
+    Exit the container by using ```Ctrl-p  +  Ctrl-q```.
 
 8.  For containers that did not have an interactive prompt, like the ```my-ubuntu``` machine we created, we can still attach to them using ```docker exec```,  this is useful when you are in development but if you find yourself doing anything like this     in production you should probably reconsider your approach.  
 
@@ -184,6 +189,8 @@ We will start with the classic Hello World, Docker style:
     ```
 
     This will give you a prompt on the running machine, while the main process still runs.
+
+    Exit the container by using ```Ctrl-p  +  Ctrl-q```.
 
 7. Lastly, we can take a low-level dive into our Docker container using the docker inspect command. It returns a JSON hash of useful configuration and status information about Docker containers.  We won't go into detail here but it is a useful command to know.  Take a look at it. What information to you recognize?
 
@@ -198,6 +205,9 @@ To wrap up the command kill all the running containers and clean up.  Note the `
 $ docker stop $(docker ps -q)  #on windows use: FOR /f "tokens=*" %i IN ('docker ps -q') DO docker stop %i
 $ docker system prune
 ```
+
+## Next Part 
+Proceed to next lab which will show you how to work with [Dockerfiles](Hands-on-with-dockerfiles.md).
 
 ## Credits
 This lab was adapted from https://github.com/Lybecker/ContainerWorkshop.

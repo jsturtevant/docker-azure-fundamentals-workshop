@@ -20,13 +20,13 @@ Welcome to the Container Workshop where you will get hands-on with containers. W
 ## Agenda 
 ### Introduction Docker Containers ([presentation](https://github.com/jsturtevant/docker-azure-fundamentals-workshop/blob/master/presentations/Introduction-to-Docker.pptx))
 - Containers 101
-- Repository’s 
 - DockerFile’s 
+- Repository’s 
    
 ### Hands on with Containers Lab 
-- Run a container 
-- Pull/Push image from Docker Hub 
-- DockerFile 
+- [Hands on with Containers](Hands-on-with-containers.md)
+- [Hands on with Dockerfiles](Hands-on-with-dockerfiles.md)
+- [Hands on with Registries](Hands-on-with-registries.md)
     
 ### Docker Compose and CI Builds ([presentation](https://github.com/jsturtevant/docker-azure-fundamentals-workshop/blob/master/presentations/Compose-and-BuildProcess.pptx))
 

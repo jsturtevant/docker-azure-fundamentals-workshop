@@ -2,6 +2,12 @@
 
 In this lab you will be introduced Docker Repositories.  In the previous lab we created a custom image using Asp.Net Core and a Dockerfile.  This is great for development but it's not useful if we can share that image with the rest of the team or our other environments.  In this lab we will create a private Container Registry in Azure and push our images to it.
 
+This is the third part in Lab1:
+    - [Hands on with Containers](Hands-on-with-containers.md)
+    - [Hands on with Dockerfiles](Hands-on-with-dockerfiles.md)
+    - [Hands on with Registries](this file)
+
+
 ## Let's get started
 
 1. Using the Azure Cli 2.0 create a resource group:
