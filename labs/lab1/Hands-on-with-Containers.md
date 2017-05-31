@@ -1,4 +1,4 @@
-# Docker Intro
+# Docker CLI Intro
 
 In this lab you will be introduced the useful Docker CLI commands.  This will set the foundation for working with Docker in the rest of the labs.
 

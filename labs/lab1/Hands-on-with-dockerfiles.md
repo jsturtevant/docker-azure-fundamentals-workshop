@@ -1,4 +1,4 @@
-# Working containers with Dockerfile and Registries
+# Working with Dockerfiles
 
 In this lab you will be introduced the DockerFile and Docker Compose.  In the previous lab we created a container, added a file and committed.  Although this was a good exercise to get us use to working with containers, in real systems this would quickly become tedious.  Instead there is a concept of a docker file, which is a script that enables use to define what container should look like.  
 
