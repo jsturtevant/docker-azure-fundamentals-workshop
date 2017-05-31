@@ -27,9 +27,9 @@ The following are optional:
 - Repository’s 
    
 ### Hands on with Containers Lab 
-- [Hands on with Containers](Hands-on-with-containers.md)
-- [Hands on with Dockerfiles](Hands-on-with-dockerfiles.md)
-- [Hands on with Registries](Hands-on-with-registries.md)
+- [Hands on with Containers](labs/lab1/Hands-on-with-containers.md)
+- [Hands on with Dockerfiles](labs/lab1/Hands-on-with-dockerfiles.md)
+- [Hands on with Registries](labs/lab1/Hands-on-with-registries.md)
     
 ### Docker Compose and CI Builds ([presentation](https://github.com/jsturtevant/docker-azure-fundamentals-workshop/blob/master/presentations/Compose-and-BuildProcess.pptx))
 
