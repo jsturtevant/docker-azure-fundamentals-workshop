@@ -3,6 +3,7 @@
 In this lab you will be introduced the useful Docker CLI commands.  This will set the foundation for working with Docker in the rest of the labs.
 
 This is the first part in Lab1:
+
     - Hands on with Containers (this file)
     - [Hands on with Dockerfiles](Hands-on-with-dockerfiles.md)
     - [Hands on with Registries](Hands-on-with-registries.md)
