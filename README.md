@@ -43,9 +43,6 @@ The following are optional:
 - Bonus: 
     - [Create Swarm Cluster In Azure](https://github.com/billpratt/docker-azure-workshop/blob/master/deploy-docker-swarm.md)
 
-
-
-
 ## Credits
 
 Some of the labs for this workshop were adapted from https://github.com/Lybecker/ContainerWorkshop and https://github.com/tripdubroot/ContainerCamp.  
