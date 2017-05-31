@@ -6,9 +6,9 @@ We will use a ```Dockerfile``` to build and run an Asp.Net Core application.  No
 
 This is the second part in Lab1:
 
-    - [Hands on with Containers](Hands-on-with-containers.md)
-    - [Hands on with Dockerfiles](this file)
-    - [Hands on with Registries](Hands-on-with-registries.md)
+- [Hands on with Containers](Hands-on-with-containers.md)
+- [Hands on with Dockerfiles](this file)
+- [Hands on with Registries](Hands-on-with-registries.md)
 
 ## Let's get started
 1. If you haven't already clone ths repository at ```https://github.com/jsturtevant/docker-azure-fundamentals-workshop``` and move into the directory ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker```.  You can optionally open the code in VS Code or your favorite editor.

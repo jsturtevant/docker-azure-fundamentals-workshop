@@ -4,9 +4,9 @@ In this lab you will be introduced Docker Repositories.  In the previous lab we 
 
 This is the third part in Lab1:
 
-    - [Hands on with Containers](Hands-on-with-containers.md)
-    - [Hands on with Dockerfiles](Hands-on-with-dockerfiles.md)
-    - [Hands on with Registries](this file)
+- [Hands on with Containers](Hands-on-with-containers.md)
+- [Hands on with Dockerfiles](Hands-on-with-dockerfiles.md)
+- [Hands on with Registries](this file)
 
 
 ## Let's get started
