@@ -36,7 +36,9 @@ This is the second part in Lab1:
     COPY ./bin/Release/netcoreapp1.1/publish .
     ```
 
-    You will notice that this copies the files at ```bin/Release/netcoreapp1.1/``` to the container.  We have not yet built our project so we could use the command line to restore the packages, build the source and then use the above Dockerfile (*if you don't have dotnet core installed skip to step 3*):
+    You will notice that this copies the files at ```bin/Release/netcoreapp1.1/``` to the container.  We have not yet built our project so we could use the command line to restore the packages, build the source and then use the above Dockerfile.
+    
+    > Note: *if you don't have dotnet core installed skip to step 3.*  Read the steps below to understand how it would work.
     
     ```
     dotnet restore
@@ -81,7 +83,7 @@ This is the second part in Lab1:
     docker-compose -f docker-compose.build.yml up build
     ```
 
-    This will build the project **inside the ```microsoft/aspnetcore-build:1.1.2```** container.  There is a volume map that maps the current directory (all of the asp.net source) to the container.  When the build is finished you should find the resulting build at ```./bin/Release/netcoreapp1.1/publish```.  
+    This will build the project **inside the ```microsoft/aspnetcore-build:1.1.2```** container.  There is a volume map that maps the current directory (all of the asp.net source) to the container.  When the build is finished you should find the resulting build at on your computer ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker\bin\Release\netcoreapp1.1\publish```.  
 
     Now you can build the image and run your project:
 
@@ -89,6 +91,8 @@ This is the second part in Lab1:
     docker-compose -f docker-compose.build.yml build build-image
     docker run -d -p 8080:80 hellodocker
     ```
+
+    This step is equivelant to running ```docker build -t hellodocker .``` manually.  The advantage of putting inside the compose file is that you now can track the image version name and everything is in one place.
 
     Navigate to navigate to ```localhost:8080``` to see your project. 
 

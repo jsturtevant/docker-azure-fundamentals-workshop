@@ -11,6 +11,12 @@ This is the third part in Lab1:
 
 ## Let's get started
 
+0. If you don't have the Azure Cli 2.0 installed locally run the following command to download the docker image with it installed.  the rest of the steps using Azure cli should be run inside the container.
+
+    ```
+    docker run -it azuresdk/azure-cli-python 
+    ```
+
 1. Using the Azure Cli 2.0 create a resource group:
 
     ```
@@ -23,13 +29,15 @@ This is the third part in Lab1:
     az acr create -n workshopRegistry -g dockerworkshop -l eastus
     ```
 
-7.  Assign an Azure Active Directory Service Principal to the registry using the ```id``` that was output in the previous command:
+3.  Assign an Azure Active Directory Service Principal to the registry using the ```id``` that was output in the previous command:
 
     ```
     az ad sp create-for-rbac --scopes /subscriptions/<your-registry-id>/resourcegroups/myresourcegroup/providers/Microsoft.ContainerRegistry/registries/workshopRegistry --role Owner --password <your-strong-password>
     ```
 
 8. We will use the image we created in the previous lab.  First we will tage it to be something more meaning full:
+
+    > note: The rest of the commands in the lab should be run on your local machine. Not inside the docker container with the Azure Cli (step 0).
 
     ```
     $ docker tag hellodocker myregistry.azurecr.io/dockerworkshop/hellodocker:1.0
