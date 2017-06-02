@@ -17,13 +17,73 @@ This is the third part in Lab1:
     docker run -it azuresdk/azure-cli-python 
     ```
 
-1. Using the Azure Cli 2.0 create a resource group:
+1. Before you continue please login into the Azure CLI and get your subscription Id.
+
+    Login to the Azure CLI
+    
+    ```
+    az login
+    ```
+
+    You should see output similar to below. Follow the instructions printed on the command shell. When that process completes, the command shell completes the log in process. It might look something like:
+
+    ```
+    [
+        {
+            "cloudName": "AzureCloud",
+            "id": "...",
+            "isDefault": true,
+            "name": "Free Trial",
+            "state": "Enabled",
+            "tenantId": "...",
+            "user": {
+            "name": "...",
+            "type": "user"
+            }
+        }
+    ] 
+    ```
+
+    Get your subscription Id
+    
+    ```
+    az account list
+    ```
+
+    This will print out a JSON block similar to the below one showing the accounts you are currently logged into. The subscription id is found in the id field.
+
+    ```
+    [
+        {
+            "cloudName": "AzureCloud",
+            "id": ".....",
+            "isDefault": true,
+            "name": "Free Trial",
+            "state": "Enabled",
+            "tenantId": "....",
+            "user": {
+                "name": "....",
+                "type": "user"
+            }
+        }
+    ]
+    ```
+
+    Copy your subscription id because we will use it a few times.
+
+    Confirm your Azure Subscription
+
+    ```
+    az account set --subscription <YOUR SUB ID>.  
+    ```
+    
+2. Using the Azure Cli 2.0 create a resource group:
 
     ```
     az group create --name dockerworkshop
     ```
 
-2. Create a registry:
+3. Create a registry:
 
     ```
     az acr create -n workshopRegistry -g dockerworkshop -l eastus
