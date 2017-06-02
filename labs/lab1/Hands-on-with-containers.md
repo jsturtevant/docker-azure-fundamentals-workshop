@@ -140,7 +140,7 @@ We will start with the classic Hello World, Docker style:
     docker start  -a 2ccb5af5704b
     ```
 
-    This is useful if you are using docker container to run a tool as we are doing in later labs to run the Azure Cli without having to install it on your machine.  In the case like the cli we would need to also attach be able to run commands so we would include the ```-i``` parameter with running ```docker start```. 
+    This is useful if you are using docker container to run a tool as we are doing in later labs to run the Azure Cli without having to install it on your machine.  In the case like the cli we would need to be able to run commands so we would include the interactive ```-i``` parameter when running ```docker start```. 
 
 7.  We can also re-attach to any running containers.  Let's re-attach the the running Ubuntu image, add a file, then create a new custom image.  This will demonstrate how you work with containers and is useful in one off scenarios but not so much in production.  We will see a better way to modify container contents in a later lab.  For now this will get you use to working with containers. 
 
