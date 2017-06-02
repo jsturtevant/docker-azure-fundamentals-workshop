@@ -77,7 +77,7 @@ This is the second part in Lab1:
 
     This uses a compose file to add two new services that help automate the build process.  The ```build-image``` service simply uses the Dockerfile that we already created.  The second service ```build``` uses asp.net core build image that has all the dependencies needed to build a asp.net core project. If you do not have asp.net core installed this will still enable you to build the project.
 
-    To use the compose file, first build the project:
+4. To use the compose file to build the project:
 
     ```
     docker-compose -f docker-compose.build.yml up build
@@ -85,7 +85,7 @@ This is the second part in Lab1:
 
     This will build the project **inside the ```microsoft/aspnetcore-build:1.1.2```** container.  There is a volume map that maps the current directory (all of the asp.net source) to the container.  When the build is finished you should find the resulting build at on your computer ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker\bin\Release\netcoreapp1.1\publish```.  
 
-    Now you can build the image and run your project:
+5. Now you can build the image and run your project:
 
     ```
     docker-compose -f docker-compose.build.yml build build-image

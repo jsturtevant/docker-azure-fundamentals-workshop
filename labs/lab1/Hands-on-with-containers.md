@@ -122,7 +122,7 @@ We will start with the classic Hello World, Docker style:
 
     Notice that the status for the Ubuntu image is ```Up``` and the status for ```hello-world``` is ```Exited```.
 
-7. We can also re-attach to any running containers.  Let's re-attach the the running Ubuntu image, add a file, then create a new custom image.  This will demonstrate how you work with containers and is useful in one off scenarios but not so much in        production.  We will see a better way to modify container contents in a later lab.  For now this will get you use to working with containers. 
+6. We can also re-attach to any running containers.  Let's re-attach the the running Ubuntu image, add a file, then create a new custom image.  This will demonstrate how you work with containers and is useful in one off scenarios but not so much in        production.  We will see a better way to modify container contents in a later lab.  For now this will get you use to working with containers. 
 
     Use the output from the previous ```docker ps``` command to get the ```container id```.  In my case it is ```ef587c7c7b73``` but yours will be unique.  Note you only have to specify enough values from the id to be unique across containers running on your machine, in this case I used just ```ef5```:
 
@@ -169,7 +169,7 @@ We will start with the classic Hello World, Docker style:
 
     Exit the container by using ```Ctrl-p  +  Ctrl-q```.
 
-6. You can also create long running containers and inspect their logs.  Let's create a long running container and assign it a name
+7. You can also create long running containers and inspect their logs.  Let's create a long running container and assign it a name
 
 	```
 	# Start a long running process
@@ -193,7 +193,7 @@ We will start with the classic Hello World, Docker style:
 
     Exit the container by using ```Ctrl-p  +  Ctrl-q```.
 
-7. Lastly, we can take a low-level dive into our Docker container using the docker inspect command. It returns a JSON hash of useful configuration and status information about Docker containers.  We won't go into detail here but it is a useful command to know.  Take a look at it. What information to you recognize?
+9. Lastly, we can take a low-level dive into our Docker container using the docker inspect command. It returns a JSON hash of useful configuration and status information about Docker containers.  We won't go into detail here but it is a useful command to know.  Take a look at it. What information to you recognize?
 
 	```
 	$ docker inspect my-ubuntu

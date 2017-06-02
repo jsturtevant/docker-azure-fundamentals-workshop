@@ -89,7 +89,7 @@ This is the third part in Lab1:
     az acr create -n workshopRegistry -g dockerworkshop -l eastus --sku Basic
     ```
 
-3.  Assign an Azure Active Directory Service Principal to the registry using the ```id``` that was output in the previous command.  The previous command gives you the command that you can copy paste to create the AD Service Principal.  It will look similiar:
+4.  Assign an Azure Active Directory Service Principal to the registry using the ```id``` that was output in the previous command.  The previous command gives you the command that you can copy paste to create the AD Service Principal.  It will look similiar:
 
     > note: you can put your pass word in single quotes to enable special charaters such as !,@, etc.
 
@@ -114,7 +114,7 @@ This is the third part in Lab1:
 
 > note: The rest of the commands in the lab should be run on your local machine. Not inside the docker container with the Azure Cli (step 0).
 
-8. We will use the image we created in the previous lab.  First we will tage it to be something more meaning full:
+5. We will use the image we created in the previous lab.  First we will tage it to be something more meaning full:
 
     ```
     $ docker tag hellodocker workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
@@ -122,14 +122,14 @@ This is the third part in Lab1:
 
     If we run ```docker images``` we should see ```workshopregistry/dockerworkshop/hellodocker:1.0``` listed.
 
-9. Next we will authenticate and push to our repository.  Use the values from ```appId``` and ```password``` from the previous step:
+6. Next we will authenticate and push to our repository.  Use the values from ```appId``` and ```password``` from the previous step:
 
     ```
     docker login workshopregistry.azurecr.io -u <service-principal-appId> -p <password> 
     docker push workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
 
-10. Finally you can remove your local image and pull it locally to verify it works:
+7. Finally you can remove your local image and pull it locally to verify it works:
 
     ```
     docker rmi workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
