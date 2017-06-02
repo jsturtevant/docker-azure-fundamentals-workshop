@@ -189,7 +189,7 @@ We will start with the classic Hello World, Docker style:
 
     Exit the container by using ```Ctrl-p  +  Ctrl-q```.
 
-7. You can also create long running containers and inspect their logs.  Let's create a long running container and assign it a name
+8. You can also create long running containers and inspect their logs.  Let's create a long running container and assign it a name
 
 	```
 	# Start a long running process
