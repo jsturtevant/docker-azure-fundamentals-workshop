@@ -150,11 +150,11 @@ We will start with the classic Hello World, Docker style:
     $ docker attach ef5
     ```
 
-    You will now be running bash inside the container.  Next create a file and verify it's contents"
+    You will now be running bash inside the container (you may need to hit enter to get the prompt).  Next create a file and verify it's contents:
 
     ```
-    root@ef587c7c7b73:/# echo "hello from ubuntu container" > hello.txt
-    root@ef587c7c7b73:/# cat hello.txt
+    # echo "hello from ubuntu container" > hello.txt
+    # cat hello.txt
     
 
     hello from ubuntu container
@@ -199,7 +199,7 @@ We will start with the classic Hello World, Docker style:
 	$ docker logs my-ubuntu
     ```	
 
-    Exit the container by using ```Ctrl-p  +  Ctrl-q```.
+    Long running process, such as web servers are a common workload. This shows how you would be able to view the logs of the a running webserver.
 
 8.  For containers that did not have an interactive prompt, like the ```my-ubuntu``` machine we created, we can still attach to them using ```docker exec```,  this is useful when you are in development but if you find yourself doing anything like this     in production you should probably reconsider your approach.  
 
