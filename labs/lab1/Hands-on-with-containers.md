@@ -8,6 +8,16 @@ This is the first part in Lab1:
 - [Hands on with Dockerfiles](Hands-on-with-dockerfiles.md)
 - [Hands on with Registries](Hands-on-with-registries.md)
 
+### Note on Conventions used
+
+#### Brackets
+When you encounter a phrase in between ```<``` and ```>``` you are meant to substitute in a different value.
+
+For instance if you see ```az account set --subscription <YOUR SUB ID>``` you would actually type something like ```az account set --subscription 1111-1111-11111```
+
+#### Prompts
+The commands that you should run at the terminal (command prompt) will have a ```$``` in front.  When running the commands include only command after the ```$``` not the dollar sign it's self.  In [Hands on with Registries](Hands-on-with-registries.md) lab there will be commands with ```#``` in front.  These commands signal that they should be inside the Docker container running the Azure Cli.
+
 ## Let's get started
 
 We will start with the classic Hello World, Docker style:
