@@ -76,49 +76,63 @@ This is the third part in Lab1:
     ```
     az account set --subscription <YOUR SUB ID>.  
     ```
-    
+
 2. Using the Azure Cli 2.0 create a resource group:
 
     ```
-    az group create --name dockerworkshop
+    az group create --name dockerworkshop --location eastus
     ```
 
-3. Create a registry:
+3. Create a registry.  This step will take a few minutes.
 
     ```
-    az acr create -n workshopRegistry -g dockerworkshop -l eastus
+    az acr create -n workshopRegistry -g dockerworkshop -l eastus --sku Basic
     ```
 
-3.  Assign an Azure Active Directory Service Principal to the registry using the ```id``` that was output in the previous command:
+3.  Assign an Azure Active Directory Service Principal to the registry using the ```id``` that was output in the previous command.  The previous command gives you the command that you can copy paste to create the AD Service Principal.  It will look similiar:
+
+    > note: you can put your pass word in single quotes to enable special charaters such as !,@, etc.
 
     ```
-    az ad sp create-for-rbac --scopes /subscriptions/<your-registry-id>/resourcegroups/myresourcegroup/providers/Microsoft.ContainerRegistry/registries/workshopRegistry --role Owner --password <your-strong-password>
+    az ad sp create-for-rbac -n acrworkshop --scopes /subscriptions/<your-registry-id>/resourcegroups/dockerworkshop/providers/Microsoft.ContainerRegistry/registries/workshopRegistry --role Owner 
     ```
+
+    After a few  moments you should see output similiar too:
+
+    ```
+    Retrying role assignment creation: 1/36
+    {
+    "appId": "7e837398-27e1-44cd-a52f-afb9671214d3",
+    "displayName": "acrworkshop",
+    "name": "http://azure-cli-2017-06-02-12-45-19",
+    "password": "10d38737e-9d36-43f6-82d2-30a632ddde36",
+    "tenant": "464858f3-e0d2-4c88-a99d-caa6229c81a6"
+    }
+    ```
+
+    Take note of the ```appId``` and ```password``` in the output we will be using it in a later step.
+
+> note: The rest of the commands in the lab should be run on your local machine. Not inside the docker container with the Azure Cli (step 0).
 
 8. We will use the image we created in the previous lab.  First we will tage it to be something more meaning full:
 
-    > note: The rest of the commands in the lab should be run on your local machine. Not inside the docker container with the Azure Cli (step 0).
-
     ```
-    $ docker tag hellodocker myregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker tag hellodocker workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
 
-    If we run ```docker images``` we should see dockerworkshop/hellodocker:1.0 listed.
+    If we run ```docker images``` we should see ```workshopregistry/dockerworkshop/hellodocker:1.0``` listed.
 
-9. Next we will authenticate and push to our repository:
+9. Next we will authenticate and push to our repository.  Use the values from ```appId``` and ```password``` from the previous step:
 
     ```
-    docker login myregistry.azurecr.io -u <service-principal-id> -p <your-strong-password>
-    docker push myregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    docker login workshopregistry.azurecr.io -u <service-principal-appId> -p <password> 
+    docker push workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
-
-    If you log into the Azure Portal and navigate to your registry you should see the image:
-
 
 10. Finally you can remove your local image and pull it locally to verify it works:
 
     ```
-    docker rmi myregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    docker rmi workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
     docker images
     ```
 
@@ -127,8 +141,8 @@ This is the third part in Lab1:
     Now pull it from the registry and run it:
 
     ```
-    docker pull myregistry.azurecr.io/dockerworkshop/hellodocker:1.0
-    docker run -d -p 8080:80 myregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    docker pull workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    docker run -d -p 8080:80 workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
 
      Navigate to navigate to ```localhost:8080``` to see your project. 
