@@ -39,7 +39,7 @@ The following are optional:
 - Swarm API 
     
 ### Orchestrators Hands On 
-- Deploy Kubernetes with Azure Container Service 
+- [Create Kubernetes Cluster with Azure Container Service](https://github.com/billpratt/docker-azure-workshop/blob/master/deploy-kubernetes-acs.md)
 - Bonus: 
     - [Create Swarm Cluster In Azure](https://github.com/billpratt/docker-azure-workshop/blob/master/deploy-docker-swarm.md)
 
