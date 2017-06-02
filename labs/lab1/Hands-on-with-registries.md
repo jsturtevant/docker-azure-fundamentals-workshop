@@ -83,16 +83,16 @@ This is the third part in Lab1:
     # az group create --name dockerworkshop --location eastus
     ```
 
-3. Create a registry.  This step will take a few minutes.
+3. Create a registry.  The registry name must be unique accross all of azure as it will be apart of the url to access your registry.  Give it a unique name with your intials at the end.  This step will take a few minutes.
 
     ```
-    # az acr create -n workshopRegistry -g dockerworkshop -l eastus --sku Basic
+    # az acr create -n workshopRegistry<your-initials> -g dockerworkshop -l eastus --sku Basic
     ```
 
 4.  Assign an Azure Active Directory Service Principal to the registry using the ```id``` that was output in the previous command.  The previous command gives you the command that you can copy paste to create the AD Service Principal.  It will look similiar:
 
     ```
-    # az ad sp create-for-rbac -n acrworkshop --scopes /subscriptions/<your-registry-id>/resourcegroups/dockerworkshop/providers/Microsoft.ContainerRegistry/registries/workshopRegistry --role Owner 
+    # az ad sp create-for-rbac -n acrworkshop --scopes /subscriptions/<your-registry-id>/resourcegroups/dockerworkshop/providers/Microsoft.ContainerRegistry/registries/workshopRegistry<your-initials> --role Owner 
     ```
 
     After a few  moments you should see output similiar too:
@@ -115,22 +115,22 @@ This is the third part in Lab1:
 5. We will use the image we created in the previous lab.  First we will tage it to be something more meaning full:
 
     ```
-    $ docker tag hellodocker workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker tag hellodocker  workshopRegistry<your-initials>.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
 
-    If we run ```docker images``` we should see ```workshopregistry/dockerworkshop/hellodocker:1.0``` listed.
+    If we run ```docker images``` we should see ``` workshopRegistry<your-initials>/dockerworkshop/hellodocker:1.0``` listed.
 
 6. Next we will authenticate and push to our repository.  Use the values from ```appId``` and ```password``` from the previous step:
 
     ```
-    $ docker login workshopregistry.azurecr.io -u <service-principal-appId> -p <password> 
-    $ docker push workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker login  workshopRegistry<your-initials>.azurecr.io -u <service-principal-appId> -p <password> 
+    $ docker push works workshopRegistry<your-initials>hopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
 
 7. Finally you can remove your local image and pull it locally to verify it works:
 
     ```
-    $ docker rmi workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker rmi  workshopRegistry<your-initials>.azurecr.io/dockerworkshop/hellodocker:1.0
     $ docker images
     ```
 
@@ -139,8 +139,8 @@ This is the third part in Lab1:
     Now pull it from the registry and run it:
 
     ```
-    $ docker pull workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
-    $ docker run -d -p 8080:80 workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker pull  workshopRegistry<your-initials>.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker run -d -p 8080:80  workshopRegistry<your-initials>.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
 
      Navigate to navigate to ```localhost:8080``` to see your project. 
@@ -152,4 +152,6 @@ To wrap up the command kill all the running containers and clean up.  Note the `
 $ docker stop $(docker ps -q)  #on windows use: FOR /f "tokens=*" %i IN ('docker ps -q') DO docker stop %i
 $ docker system prune
 ```
+
+You can also login into the portal and remove the registry if you will not be using it in the future.
 

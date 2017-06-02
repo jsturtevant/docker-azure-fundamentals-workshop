@@ -83,7 +83,7 @@ This is the second part in Lab1:
     $ docker-compose -f docker-compose.build.yml up build
     ```
 
-    This will build the project **inside the ```microsoft/aspnetcore-build:1.1.2```** container.  There is a volume map that maps the current directory (all of the asp.net source) to the container.  When the build is finished you should find the resulting build at on your computer ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker\bin\Release\netcoreapp1.1\publish```.  
+    This will build the project ***inside the ```microsoft/aspnetcore-build:1.1.2```*** container.  There is a volume map that maps the current directory (all of the asp.net source) to the container.  When the build is finished you should find the resulting build at on your computer ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker\bin\Release\netcoreapp1.1\publish```.  
 
 5. Now you can build the image and run your project:
 
