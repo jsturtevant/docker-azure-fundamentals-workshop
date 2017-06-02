@@ -16,7 +16,7 @@ When you encounter a phrase in between ```<``` and ```>``` you are meant to subs
 For instance if you see ```az account set --subscription <YOUR SUB ID>``` you would actually type something like ```az account set --subscription 1111-1111-11111```
 
 #### Prompts
-The commands that you should run at the terminal (command prompt) will have a ```$``` in front.  When running the commands include only command after the ```$``` not the dollar sign it's self.  Anytime you see ```#``` in the labs. These commands signal that they should be inside the Docker container that was started.
+The commands that you should run at the terminal (command prompt) will have a ```$``` in front.  When running the commands include only command after the ```$``` not the dollar sign it's self.  Anytime you see ```#``` in the labs this signals that the commands should be inside the Docker container that was started (usually in a previous step).
 
 ## Let's get started
 
@@ -59,9 +59,9 @@ We will start with the classic Hello World, Docker style:
 	https://docs.docker.com/userguide/
 	```
 	
-	First the ```hello-world``` image is downloaded to your docker machine. Then ```hello-world``` container ran it's start up command and exited.  It is important to note that when a container's startup command (specified implicitly in ```hello-world```. We will learn to specify startup commands later) stops the container stops.
+	First the ```hello-world``` image is downloaded to your machine. Then ```hello-world``` container ran it's start up command and exited.  It is important to note that when a container's startup command stops the container stops (specified implicitly in ```hello-world```. We will learn to specify startup commands later).
     
-    It is the same as doing a ```pull``` operation.  The difference between ```pull``` and ```run``` is that ```run```, after retrieving the latest version (if not specified) the container is started.
+    To download an image we could also issue a ```pull``` operation.  The difference between ```pull``` and ```run``` is that ```run```, after retrieving the latest version (if not specified), a container is started, where was with pull we are only downloading the image.
 	
 2. Now let's try to ```pull``` the latest Ubuntu images to see the difference and have a bit more fun:
 
@@ -69,7 +69,7 @@ We will start with the classic Hello World, Docker style:
 	$ docker pull ubuntu
 	```
 
-	It will download the latest [Ubuntu](https://hub.docker.com/_/ubuntu/) image from [Docker Hub](https://hub.docker.com/).  Notice it did not run a container this time.
+	It will download the latest [Ubuntu](https://hub.docker.com/_/ubuntu/) image from [Docker Hub](https://hub.docker.com/).  Notice it did **not** run a container this time.
 
 3. List the all the current images you have on your local machine:
 
@@ -101,7 +101,9 @@ We will start with the classic Hello World, Docker style:
     # /usr/games/fortune
     ```
 	
-	At this point you are running commands inside the Ubuntu container.  To leave the container and get back to your local machine prompt you can use the escape sequence  ```Ctrl-p  +  Ctrl-q```.  This will detach the TTY without exiting the shell; The container will continue to exist in a stopped state once exited. 
+    What was your fortune? 
+
+	At this point you are running commands inside the Ubuntu container.  To leave the container and get back to your local machine prompt you can use the escape sequence  ```Ctrl-p  +  Ctrl-q```.  This will detach the TTY *without* exiting the shell; The container will continue to exist in a running state once exited. 
 
 5. To see a list of all the containers running:
 
@@ -116,7 +118,7 @@ We will start with the classic Hello World, Docker style:
     ef587c7c7b73        ubuntu              "/bin/bash"         23 seconds ago      Up 22 seconds                           heuristic
     ```
 
-    ```docker ps``` shows all the running containers, in this case the Ubuntu bash prompt we just exited.  But we started and stopped a ```hello-world``` container earlier.  To see see all containers, both running and stopped, us the following command:
+    ```docker ps``` shows all the running containers, in this case the Ubuntu bash prompt we just exited.  But we started and stopped a ```hello-world``` container earlier.  Where is it?  To see see all containers, both running and stopped, us the following command:
 
     ```	
 	$ docker ps -a
@@ -132,9 +134,17 @@ We will start with the classic Hello World, Docker style:
 
     Notice that the status for the Ubuntu image is ```Up``` and the status for ```hello-world``` is ```Exited```.
 
-6. We can also re-attach to any running containers.  Let's re-attach the the running Ubuntu image, add a file, then create a new custom image.  This will demonstrate how you work with containers and is useful in one off scenarios but not so much in        production.  We will see a better way to modify container contents in a later lab.  For now this will get you use to working with containers. 
+6. We can start the same ```hello-world``` container by running. Use the output from the previous ```docker ps -a``` command to get the ```container id```.  In my case it is ```2ccb5af5704b``` but yours will be unique.  Note you only have to specify enough values from the id to be unique across containers running on your machine, in this case I used ```ef5```:
 
-    Use the output from the previous ```docker ps``` command to get the ```container id```.  In my case it is ```ef587c7c7b73``` but yours will be unique.  Note you only have to specify enough values from the id to be unique across containers running on your machine, in this case I used just ```ef5```:
+    ```
+    docker start  -a 2ccb5af5704b
+    ```
+
+    This is useful if you are using docker container to run a tool as we are doing in later labs to run the Azure Cli without having to install it on your machine.  In the case like the cli we would need to also attach be able to run commands so we would include the ```-i``` parameter with running ```docker start```. 
+
+7.  We can also re-attach to any running containers.  Let's re-attach the the running Ubuntu image, add a file, then create a new custom image.  This will demonstrate how you work with containers and is useful in one off scenarios but not so much in production.  We will see a better way to modify container contents in a later lab.  For now this will get you use to working with containers. 
+
+    Again, use the output from the previous ```docker ps``` command to get the ```container id```.  In my case it is ```ef587c7c7b73``` but yours will be unique.
 
     ```
     $ docker attach ef5
