@@ -1,8 +1,8 @@
 # Working with Dockerfiles
 
-In this lab you will be introduced the DockerFile and Docker Compose.  In the previous lab we created a container, added a file and committed.  Although this was a good exercise to get us use to working with containers, in real systems this would quickly become tedious.  Instead there is a concept of a docker file, which is a script that enables use to define what container should look like.  
+In this lab you will be introduced the [DockerFile](https://docs.docker.com/engine/reference/builder/) and [Docker Compose](https://docs.docker.com/compose/).  In the previous lab we created a container, added a file and committed.  Although this was a good exercise to get us use to working with containers, in real systems this would quickly become tedious.  Instead there is a concept of a Dockerfile, which is a script that enables use to define what container should look like.  
 
-We will use a ```Dockerfile``` to build and run an Asp.Net Core application.  Note that you will **not** need anything other than docker installed to do this lab.
+We will use a ```Dockerfile``` to build and run an [Asp.Net Core](https://www.microsoft.com/net/core/platform) application.  Note that you will **not** need anything other than docker installed to do this lab.
 
 This is the second part in Lab1:
 
@@ -11,7 +11,7 @@ This is the second part in Lab1:
 - [Hands on with Registries](Hands-on-with-registries.md)
 
 ## Let's get started
-1. If you haven't already clone ths repository at ```https://github.com/jsturtevant/docker-azure-fundamentals-workshop``` and move into the directory ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker```.  You can optionally open the code in VS Code or your favorite editor.
+1. If you haven't already clone ths repository at https://github.com/jsturtevant/docker-azure-fundamentals-workshop and move into the directory ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker```.  You can optionally open the code in VS Code or your favorite editor.
 
     ``` 
     $ git clone https://github.com/jsturtevant/docker-azure-fundamentals-workshop.git
