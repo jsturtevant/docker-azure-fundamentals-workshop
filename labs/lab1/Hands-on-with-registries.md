@@ -11,10 +11,10 @@ This is the third part in Lab1:
 
 ## Let's get started
 
-0. If you don't have the Azure Cli 2.0 installed locally run the following command to download the docker image with it installed.  the rest of the steps using Azure cli should be run inside the container.
+0. If you don't have the Azure Cli 2.0 installed locally run the following command to download the docker image with it installed.  Steps with the ```#``` should be run with in the Azure Cli contianer.  You can open two terminals for this lab, one for the Docker Cli container and one for running Docker on your local machine.
 
     ```
-    docker run -it azuresdk/azure-cli-python 
+    $ docker run -it azuresdk/azure-cli-python 
     ```
 
 1. Before you continue please login into the Azure CLI and get your subscription Id.
@@ -22,7 +22,7 @@ This is the third part in Lab1:
     Login to the Azure CLI
     
     ```
-    az login
+    # az login
     ```
 
     You should see output similar to below. Follow the instructions printed on the command shell. When that process completes, the command shell completes the log in process. It might look something like:
@@ -47,7 +47,7 @@ This is the third part in Lab1:
     Get your subscription Id
     
     ```
-    az account list
+    # az account list
     ```
 
     This will print out a JSON block similar to the below one showing the accounts you are currently logged into. The subscription id is found in the id field.
@@ -74,27 +74,25 @@ This is the third part in Lab1:
     Confirm your Azure Subscription
 
     ```
-    az account set --subscription <YOUR SUB ID>.  
+    # az account set --subscription <YOUR SUB ID>.  
     ```
 
 2. Using the Azure Cli 2.0 create a resource group:
 
     ```
-    az group create --name dockerworkshop --location eastus
+    # az group create --name dockerworkshop --location eastus
     ```
 
 3. Create a registry.  This step will take a few minutes.
 
     ```
-    az acr create -n workshopRegistry -g dockerworkshop -l eastus --sku Basic
+    # az acr create -n workshopRegistry -g dockerworkshop -l eastus --sku Basic
     ```
 
 4.  Assign an Azure Active Directory Service Principal to the registry using the ```id``` that was output in the previous command.  The previous command gives you the command that you can copy paste to create the AD Service Principal.  It will look similiar:
 
-    > note: you can put your pass word in single quotes to enable special charaters such as !,@, etc.
-
     ```
-    az ad sp create-for-rbac -n acrworkshop --scopes /subscriptions/<your-registry-id>/resourcegroups/dockerworkshop/providers/Microsoft.ContainerRegistry/registries/workshopRegistry --role Owner 
+    # az ad sp create-for-rbac -n acrworkshop --scopes /subscriptions/<your-registry-id>/resourcegroups/dockerworkshop/providers/Microsoft.ContainerRegistry/registries/workshopRegistry --role Owner 
     ```
 
     After a few  moments you should see output similiar too:
@@ -125,15 +123,15 @@ This is the third part in Lab1:
 6. Next we will authenticate and push to our repository.  Use the values from ```appId``` and ```password``` from the previous step:
 
     ```
-    docker login workshopregistry.azurecr.io -u <service-principal-appId> -p <password> 
-    docker push workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker login workshopregistry.azurecr.io -u <service-principal-appId> -p <password> 
+    $ docker push workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
 
 7. Finally you can remove your local image and pull it locally to verify it works:
 
     ```
-    docker rmi workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
-    docker images
+    $ docker rmi workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker images
     ```
 
     Verify the image is no longer there.
@@ -141,12 +139,11 @@ This is the third part in Lab1:
     Now pull it from the registry and run it:
 
     ```
-    docker pull workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
-    docker run -d -p 8080:80 workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker pull workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker run -d -p 8080:80 workshopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
 
      Navigate to navigate to ```localhost:8080``` to see your project. 
-
 
 ## Wrap up
 To wrap up the command kill all the running containers and clean up.  Note the ```docker system prune``` should only be used in environments where you want to throw away old containers.

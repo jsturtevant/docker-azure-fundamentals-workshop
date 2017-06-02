@@ -41,14 +41,14 @@ This is the second part in Lab1:
     > Note: *if you don't have dotnet core installed skip to step 3.*  Read the steps below to understand how it would work.
     
     ```
-    dotnet restore
-    dotnet publish -c Release
+    $ dotnet restore
+    $ dotnet publish -c Release
     ```  
 
     Finally we can build the image by running:
 
     ```
-    docker build -t hellodocker .
+    $ docker build -t hellodocker .
     ```
 
     Run your new docker container with ```docker run -d -p 8080:80 hellodocker``` and navigate to navigate to ```localhost:8080```.
@@ -80,7 +80,7 @@ This is the second part in Lab1:
 4. To use the compose file to build the project:
 
     ```
-    docker-compose -f docker-compose.build.yml up build
+    $ docker-compose -f docker-compose.build.yml up build
     ```
 
     This will build the project **inside the ```microsoft/aspnetcore-build:1.1.2```** container.  There is a volume map that maps the current directory (all of the asp.net source) to the container.  When the build is finished you should find the resulting build at on your computer ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker\bin\Release\netcoreapp1.1\publish```.  
@@ -88,8 +88,8 @@ This is the second part in Lab1:
 5. Now you can build the image and run your project:
 
     ```
-    docker-compose -f docker-compose.build.yml build build-image
-    docker run -d -p 8080:80 hellodocker
+    $ docker-compose -f docker-compose.build.yml build build-image
+    $ docker run -d -p 8080:80 hellodocker
     ```
 
     This step is equivelant to running ```docker build -t hellodocker .``` manually.  The advantage of putting inside the compose file is that you now can track the image version name and everything is in one place.
