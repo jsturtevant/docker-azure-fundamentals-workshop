@@ -1,6 +1,6 @@
 # Working with Registries
 
-In this lab you will be introduced Docker Repositories.  In the previous lab we created a custom image using Asp.Net Core and a Dockerfile.  This is great for development but it's not useful if we can share that image with the rest of the team or our other environments.  In this lab we will create a private Container Registry in Azure and push our images to it.
+In this lab you will be introduced to Docker Repositories.  In the previous lab we created a custom image using ASP.NET Core and a Dockerfile.  This is great for development but it's not useful if we can't share that image with the rest of the team or our other environments.  In this lab we will create a private Container Registry in Azure and push our images to it.
 
 This is the third part in Lab1:
 
@@ -148,7 +148,7 @@ This is the third part in Lab1:
      Navigate to navigate to ```localhost:8080``` to see your project. 
 
 ## Wrap up
-To wrap up the command kill all the running containers and clean up.  Note the ```docker system prune``` should only be used in environments where you want to throw away old containers.
+To wrap up, kill all the running containers and clean up.  Note the ```docker system prune``` should only be used in environments where you want to throw away old containers.
 
 ```
 $ docker stop $(docker ps -q)  #on windows use: FOR /f "tokens=*" %i IN ('docker ps -q') DO docker stop %i
