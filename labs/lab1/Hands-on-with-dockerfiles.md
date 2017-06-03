@@ -1,8 +1,8 @@
 # Working with Dockerfiles
 
-In this lab you will be introduced the [DockerFile](https://docs.docker.com/engine/reference/builder/) and [Docker Compose](https://docs.docker.com/compose/).  In the previous lab we created a container, added a file and committed.  Although this was a good exercise to get us use to working with containers, in real systems this would quickly become tedious.  Instead there is a concept of a Dockerfile, which is a script that enables use to define what container should look like.  
+In this lab you will be introduced the [Dockerfile](https://docs.docker.com/engine/reference/builder/) and [Docker Compose](https://docs.docker.com/compose/).  In the previous lab we created a container, added a file and committed.  Although this was a good exercise to get us use to working with containers, in real systems this would quickly become tedious.  Instead there is a concept of a Dockerfile, which is a set of instructions that enables us to define what a container should look like.  
 
-We will use a ```Dockerfile``` to build and run an [Asp.Net Core](https://www.microsoft.com/net/core/platform) application.  Note that you will **not** need anything other than docker installed to do this lab.
+We will use a ```Dockerfile``` to build and run an [ASP.NET Core](https://www.microsoft.com/net/core/platform) application.  Note that you will **not** need anything other than docker installed to do this lab.
 
 This is the second part in Lab1:
 
@@ -11,14 +11,14 @@ This is the second part in Lab1:
 - [Hands on with Registries](Hands-on-with-registries.md)
 
 ## Let's get started
-1. If you haven't already clone ths repository at https://github.com/jsturtevant/docker-azure-fundamentals-workshop and move into the directory ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker```.  You can optionally open the code in VS Code or your favorite editor.
+1. If you haven't already, clone the repository at [https://github.com/jsturtevant/docker-azure-fundamentals-workshop](https://github.com/jsturtevant/docker-azure-fundamentals-workshop) and move into the directory ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker```.  You can optionally open the code in VS Code or your favorite editor.
 
     ``` 
     $ git clone https://github.com/jsturtevant/docker-azure-fundamentals-workshop.git
     $ cd docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker
     ```
 
-    This is a simple hello word in ASP.NET.  
+    This is a simple hello word in ASP.NET Core.  
 
 2. Add a file in the root of the repository called ```Dockerfile``` (```touch Dockerfile``` or through your editor)
     
@@ -36,7 +36,7 @@ This is the second part in Lab1:
     COPY ./bin/Release/netcoreapp1.1/publish .
     ```
 
-    You will notice that this copies the files at ```bin/Release/netcoreapp1.1/``` to the container.  We have not yet built our project so those file will not be there.  We could use the command line to restore the packages, build the source and then use the above Dockerfile.
+    You will notice that this copies the files at ```bin/Release/netcoreapp1.1/``` to the container.  We have not yet built our project so those files will not be there.  We could use the command line to restore the packages, build the source and then use the above Dockerfile.
     
     > Note: *if you don't have dotnet core installed skip to step 3.*  Read the steps below to understand how it would work.
     
@@ -51,11 +51,13 @@ This is the second part in Lab1:
     $ docker build -t hellodocker .
     ```
 
-    Run your new docker container with ```docker run -d -p 8080:80 hellodocker``` and navigate to navigate to http://localhost:8080.
+    Note the ```-t``` flag in the build command. That is telling Docker to ```tag``` or name the image with ```hellodocker```.
+
+    Run your new docker container with ```docker run -d -p 8080:80 hellodocker``` and navigate to navigate to [http://localhost:8080](http://localhost:8080).
 
     Stop your container with ```docker stop <contianerid>``` 
 
-3. The above steps required you to have [.Net Core](https://www.microsoft.com/net/core/platform) installed.  It also required several manual steps. To automate the process and also eliminate the need for external dependencies (very helpful on a build machine) we can introduce a second container that will have the dependencies and tooling installed needed for building .NET Core.  We will do this using a compose file.
+3. The above steps required you to have [.NET Core](https://www.microsoft.com/net/core/platform) installed.  It also required several manual steps. To automate the process and also eliminate the need for external dependencies (very helpful on a build machine) we can introduce a second container that will have the dependencies and tooling installed needed for building .NET Core applications.  We will do this using a Docker Compose file.
 
      Add a file in the root of the repository called ```docker-compose.build.yml``` (```touch docker-compose.build.yml``` or through your editor) and paste the following in:
 
@@ -108,7 +110,7 @@ This is the second part in Lab1:
     hellodocker_build_1 exited with code 0
     ```
 
-    This will build the project ***inside the ```microsoft/aspnetcore-build:1.1.2```*** container.  There is a volume map that maps the current directory (all of the asp.net source) to the containers ```/src``` folder.  When the build is finished you should find the resulting build at on your computer ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker\bin\Release\netcoreapp1.1\publish```.  
+    This will build the project ***inside the ```microsoft/aspnetcore-build:1.1.2```*** container.  There is a volume map that maps the current directory (all of the ASP.NET Core app source) to the containers ```/src``` folder.  When the build is finished you should find the resulting build on your computer at ```docker-azure-fundamentals-workshop\labs\lab1\src\hellodocker\bin\Release\netcoreapp1.1\publish```.  
 
 5. Now you can build the image and run your project:
 
@@ -119,10 +121,10 @@ This is the second part in Lab1:
 
     This step is equivalent to running ```docker build -t hellodocker .``` manually.  The advantage of putting inside the compose file is that you now can track the image version name and everything is in one place.
 
-    Navigate to navigate to http://localhost:8080 to see your project. 
+    Navigate to navigate to [http://localhost:8080](http://localhost:8080) to see your project. 
 
 ## Wrap up
-To wrap up the command kill all the running containers and clean up.  Note the ```docker system prune``` should only be used in environments where you want to throw away old containers.
+To wrap up, kill all the running containers and clean up.  Note the ```docker system prune``` should only be used in environments where you want to throw away old containers.
 
 ```
 $ docker-compose -f docker-compose.build.yml down
