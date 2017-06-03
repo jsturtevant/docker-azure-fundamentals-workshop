@@ -31,7 +31,7 @@ The following are optional:
 - [Hands on with Dockerfiles](labs/lab1/Hands-on-with-dockerfiles.md)
 - [Hands on with Registries](labs/lab1/Hands-on-with-registries.md)
     
-### Docker Compose and CI Builds ([presentation](https://github.com/jsturtevant/docker-azure-fundamentals-workshop/blob/master/presentations/Compose-and-BuildProcess.pptx))
+### Creating Effective Docker Images ([presentation](https://github.com/billpratt/docker-azure-workshop/blob/master/slides/CreatingEffectiveDockerImages.pptx))
 
 ### Orchestrators ([presentation](https://github.com/jsturtevant/docker-azure-fundamentals-workshop/blob/master/presentations/Orchestrators.pptx))
 - Intro 
