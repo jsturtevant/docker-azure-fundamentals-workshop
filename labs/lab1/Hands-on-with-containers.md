@@ -118,7 +118,7 @@ We will start with the classic Hello World, Docker style:
     ef587c7c7b73        ubuntu              "/bin/bash"         23 seconds ago      Up 22 seconds                           heuristic
     ```
 
-    ```docker ps``` shows all the running containers, in this case the Ubuntu bash prompt we just exited.  But we started and stopped a ```hello-world``` container earlier.  Where is it?  To see see all containers, both running and stopped, us the following command:
+    ```docker ps``` shows all the running containers, in this case the Ubuntu bash prompt we just exited.  But we started and stopped a ```hello-world``` container earlier.  Where is it?  To see all containers, both running and stopped, use the following command:
 
     ```	
 	$ docker ps -a
@@ -134,15 +134,15 @@ We will start with the classic Hello World, Docker style:
 
     Notice that the status for the Ubuntu image is ```Up``` and the status for ```hello-world``` is ```Exited```.
 
-6. We can start the same ```hello-world``` container by running. Use the output from the previous ```docker ps -a``` command to get the ```container id```.  In my case it is ```2ccb5af5704b``` but yours will be unique.  Note you only have to specify enough values from the id to be unique across containers running on your machine, in this case I used ```ef5```:
+6. We can start the same ```hello-world``` container by running ```docker start -a <container id>```. Use the output from the previous ```docker ps -a``` command to get the ```container id```.  In my case it is ```2ccb5af5704b``` but yours will be unique.  Note you only have to specify enough values from the id to be unique across containers running on your machine, in this case I used ```2cc```:
 
     ```
-    docker start  -a 2ccb5af5704b
+    docker start  -a 2cc
     ```
 
-    This is useful if you are using docker container to run a tool as we are doing in later labs to run the Azure Cli without having to install it on your machine.  In the case like the cli we would need to be able to run commands so we would include the interactive ```-i``` parameter when running ```docker start```. 
+    This is useful if you are using a docker container to run a tool as we are doing in later labs to run the Azure Cli without having to install it on your machine.  In the case like the cli we would need to be able to run commands so we would include the interactive ```-i``` parameter when running ```docker start```. 
 
-7.  We can also re-attach to any running containers.  Let's re-attach the the running Ubuntu image, add a file, then create a new custom image.  This will demonstrate how you work with containers and is useful in one off scenarios but not so much in production.  We will see a better way to modify container contents in a later lab.  For now this will get you use to working with containers. 
+7.  We can also re-attach to any running containers.  Let's re-attach the the running Ubuntu image, add a file, then create a new custom image.  This will demonstrate how you work with containers and is useful in one off scenarios but not so much in production.  We will see a better way to modify container contents in a later lab.  For now this will get you used to working with containers. 
 
     Again, use the output from the previous ```docker ps``` command to get the ```container id```.  In my case it is ```ef587c7c7b73``` but yours will be unique.
 
@@ -189,7 +189,7 @@ We will start with the classic Hello World, Docker style:
 
     Exit the container by using ```Ctrl-p  +  Ctrl-q```.
 
-8. You can also create long running containers and inspect their logs.  Let's create a long running container and assign it a name
+8. You can also create long running containers and inspect their logs.  Let's create a long running container and assign it a name. Notice the ```-d``` flag. This runs the container in *detached* mode.
 
 	```
 	# Start a long running process
@@ -203,7 +203,7 @@ We will start with the classic Hello World, Docker style:
 
 8.  For containers that did not have an interactive prompt, like the ```my-ubuntu``` machine we created, we can still attach to them using ```docker exec```,  this is useful when you are in development but if you find yourself doing anything like this     in production you should probably reconsider your approach.  
 
-    ```docker exec``` will attach to the running container in a way that is similar to ```ssh``` into a machine,  all of the process will still be running and you can use it to inspect the current state of the container.    Let's attach to the 
+    ```docker exec``` will attach to the running container in a way that is similar to ```ssh``` into a machine,  all of the processes will still be running and you can use it to inspect the current state of the container.    Let's attach to the ```my-ubuntu``` container.
 
     ```
     $ docker exec -it my-ubuntu /bin/bash
@@ -213,14 +213,14 @@ We will start with the classic Hello World, Docker style:
 
     Exit the container by using ```Ctrl-p  +  Ctrl-q```.
 
-9. Lastly, we can take a low-level dive into our Docker container using the docker inspect command. It returns a JSON hash of useful configuration and status information about Docker containers.  We won't go into detail here but it is a useful command to know.  Take a look at it. What information to you recognize?
+9. Lastly, we can take a low-level dive into our Docker container using the ```docker inspect``` command. It returns a JSON hash of useful configuration and status information about Docker containers.  We won't go into detail here but it is a useful command to know.  Take a look at it. What information do you recognize?
 
 	```
 	$ docker inspect my-ubuntu
 	```
 
 ## Wrap up
-To wrap up the command kill all the running containers and clean up.  Note the ```docker system prune``` should only be used in environments where you want to throw away old containers.
+To wrap up, lets kill all the running containers and clean up.  Note the ```docker system prune``` should only be used in environments where you want to throw away old containers.
 
 ```
 $ docker stop $(docker ps -q)  #on windows use: FOR /f "tokens=*" %i IN ('docker ps -q') DO docker stop %i
