@@ -126,7 +126,7 @@ This is the third part in Lab1:
 
     ```
     $ docker login  workshopRegistry<your-initials>.azurecr.io -u <service-principal-appId> -p <password> 
-    $ docker push works workshopRegistry<your-initials>hopregistry.azurecr.io/dockerworkshop/hellodocker:1.0
+    $ docker push workshopRegistry<your-initials>.azurecr.io/dockerworkshop/hellodocker:1.0
     ```
 
 7. Finally you can remove your local image and pull it locally to verify it works:
